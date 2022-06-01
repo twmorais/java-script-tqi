@@ -8,7 +8,7 @@ function flipCard() {
     if (this === firsCard) return;
     this.classList.add('flip');
     if (!hasFlippedCard) {
-        hasFlippedCard = false;
+        hasFlippedCard = true;
         firsCard = this;
         return;
     }
@@ -17,7 +17,7 @@ function flipCard() {
     checkForMatch();
 }
 function checkForMatch() {
-    if (firsCard.datase.card === secondCard.dataset.card) {
+    if (firsCard.dataset.card === secondCard.dataset.card) {
         disableCards();
         return;
     }
@@ -40,13 +40,14 @@ function resetBoard() {
     [hasFlippedCard, lockBoard] = [false, false];
     [firsCard, secondCard] = [null, null];
 }
-function shuffle() {
+
+(function shuffle() {
     cards.forEach((card) => {
         let randomPosition = Math.floor(Math.random() * 12);
-        card.Style.order = randomPosition;
-    })();
-}
-cards.forEach((card) => {
-    card.addEventListener('click', flipCard);
-})
+        card.style.order = randomPosition;
+    });
+})();
+
+cards.forEach(card => card.addEventListener('click', flipCard));
+
 
